@@ -1,1 +1,8 @@
-# congreso-fonetica-poetica-worker
+```
+npm install
+npm run dev
+```
+
+```
+npm run deploy
+```
