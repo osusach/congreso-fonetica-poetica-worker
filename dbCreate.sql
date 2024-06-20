@@ -7,7 +7,8 @@
 CREATE TABLE listener (
   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   email TEXT NOT NULL,
-  lang INTEGER
+  lang INTEGER,
+  UNIQUE(email)
 );
 
 CREATE TABLE interested_speaker (
@@ -17,7 +18,7 @@ CREATE TABLE interested_speaker (
   title TEXT NOT NULL,
   theme TEXT NOT NULL,
   lang INTEGER
-)
+);
 
 CREATE TABLE speaker (
   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -33,4 +34,4 @@ CREATE TABLE speaker (
   bibliography TEXT NOT NULL,
   presentation_id TEXT,
   presentation_link TEXT;
-)
+);

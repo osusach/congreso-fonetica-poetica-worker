@@ -3,6 +3,7 @@ import { z } from "zod";
 
 const listenerSchema = z.object({
   email: z.string().email(),
+  lang: z.number().min(1).max(3).int()
 });
 
 export async function addListener(body: any, db: Client) {
@@ -13,10 +14,10 @@ export async function addListener(body: any, db: Client) {
       error: bodyValidation.error,
     };
   }
-  const { email } = bodyValidation.data;
-  const query = "INSERT INTO listener (email) VALUES (?);";
+  const { email, lang } = bodyValidation.data;
+  const query = "INSERT INTO listener (email, lang) VALUES (?, ?);";
   try {
-    const req = await db.execute({ sql: query, args: [email] });
+    const req = await db.execute({ sql: query, args: [email, lang] });
     if (req.rowsAffected != 1) {
       return {
         success: false,
