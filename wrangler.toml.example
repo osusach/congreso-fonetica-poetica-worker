@@ -7,14 +7,13 @@ TURSO_TOKEN = ""
 MAILERSEND_TOKEN = ""
 AUTH_TOKEN = ""
 
+[[r2_buckets]]
+binding = "PDF_BUCKET"
+bucket_name = ""
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
-# [[r2_buckets]]
-# binding = "MY_BUCKET"
-# bucket_name = "my-bucket"
 
 # [[d1_databases]]
 # binding = "DB"

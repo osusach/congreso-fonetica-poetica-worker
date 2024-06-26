@@ -4,4 +4,5 @@ type Bindings = {
   ARE_EMAILS_WORKING: boolean;
   MAILERSEND_TOKEN: string;
   AUTH_TOKEN: string
+  PDF_BUCKET: R2Bucket;
 };
