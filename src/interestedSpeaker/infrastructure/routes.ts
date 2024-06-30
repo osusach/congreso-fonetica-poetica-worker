@@ -28,8 +28,8 @@ interested.get("/", async (c) => {
 
 interested.post("/", async (c) => {
   const db = dbClient(c.env);
-  const body = await c.req.json();
-  const response = await addInterestedSpeaker(body, db);
+  const body = await c.req.parseBody();
+  const response = await addInterestedSpeaker(body, db, c.env);
   if (!response.success) {
     return c.json(response, 400);
   }

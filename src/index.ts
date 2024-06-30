@@ -16,8 +16,7 @@ app.get('/', async (c) => {
 })
 
 app.route("/listener", listener)
-app.route("/interested", interested)
-app.route("/interested_speaker", interested)
+app.route("/speaker", interested)
 
 
 

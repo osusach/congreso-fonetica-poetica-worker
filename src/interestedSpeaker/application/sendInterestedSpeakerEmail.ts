@@ -1,4 +1,5 @@
 import { correoInterested } from "./interestedSpeakerEmailTemplate";
+import { speakerRequest } from "./schemas";
 
 type fetchResponse =
   | {
@@ -10,8 +11,10 @@ type fetchResponse =
       error: unknown;
     };
 
-export async function sendEmailFunction(email: string, name: string, env: Bindings):Promise<fetchResponse> {
-  const req = createRequest(email, name, env)
+export async function sendSpeakerEmail(speakerData: speakerRequest, env: Bindings):Promise<fetchResponse> {
+  const correo = correoInterested(speakerData)
+  const documentName = "presentacion" + speakerData.email.split('@')[0] + ".pdf"
+  const req = createRequest(speakerData.title, correo, speakerData.encoded_file, documentName, env)
   try {
     const mailResponse = await fetch(req);
     if (mailResponse.ok) {
@@ -32,9 +35,13 @@ export async function sendEmailFunction(email: string, name: string, env: Bindin
   }
 }
 
+
+
 function createRequest(
-  email: string,
-  name: string,
+  title: string,
+  mailContent: string,
+  document: string,
+  documentName: string,
   env: Bindings
 ) {
   const send_request = new Request("https://api.mailersend.com/v1/email", {
@@ -46,17 +53,38 @@ function createRequest(
     },
     body: JSON.stringify({
       from: {
-        email: "email@osusach.com",
-        name: "Ligmacio",
+        email: "fypcongreso@usach.cl",
+        name: "Congreso Fonética y Poética",
       },
       to: [
         {
-          email: email,
+          email: "foneticaypoetica@usach.cl",
+          name: "Organizadores Congreso"
         },
       ],
-      subject: "Congreso de Fonética y Poética",
-      text: "Registro de interés",
-      html: correoInterested(name),
+      // cc: [
+      //   {
+      //     email: "valentinacolonna@go.ugr.es",
+      //     name: "Valentina Colonna"
+      //   },
+      //   {
+      //     email: "domingo.roman@usach.cl",
+      //     name: "Domingo Román M."
+      //   },
+      //   {
+      //     email: "nretamalvenegas@gmail.com",
+      //     name: "Nicolás Retamal Venegas"
+      //   }
+      // ],
+      subject: "Nueva Propuesta: " + title,
+      text: mailContent,
+      // html: mailContent,
+      attachments: [
+        {
+          filename: documentName,
+          content: document
+        }
+      ]
     }),
   });
   return send_request;
