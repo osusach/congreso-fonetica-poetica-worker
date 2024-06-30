@@ -2,7 +2,7 @@ import { Client } from "@libsql/client";
 import { dbQuery } from "../../shared/dbQuery";
 import { z } from "zod";
 
-const interestedSpeakerSchema = z.object({
+const speakerSchema = z.object({
   id: z.number(),
   email: z.string().email(),
   institution: z.string(),
@@ -22,9 +22,9 @@ const interestedSpeakerSchema = z.object({
 
 
 
-export async function getInterestedSpeakers(db: Client) {
+export async function getSpeakers(db: Client) {
   const query = "SELECT * FROM speaker;"
-  const speakers = await dbQuery(query, interestedSpeakerSchema, db)
+  const speakers = await dbQuery(query, speakerSchema, db)
   if (!speakers.success) {
     return {
       success: false,

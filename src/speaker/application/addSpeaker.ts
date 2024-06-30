@@ -14,7 +14,7 @@ function base64Encode (buf: ArrayBuffer) {
 
 
 
-export async function addInterestedSpeaker(
+export async function addSpeaker(
   body: any,
   db: Client,
   env: Bindings

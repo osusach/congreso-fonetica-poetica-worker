@@ -1,4 +1,4 @@
-import { correoInterested } from "./interestedSpeakerEmailTemplate";
+import { correoSpeaker } from "./speakerEmailTemplate";
 import { speakerRequest } from "./schemas";
 
 type fetchResponse =
@@ -12,7 +12,7 @@ type fetchResponse =
     };
 
 export async function sendSpeakerEmail(speakerData: speakerRequest, env: Bindings):Promise<fetchResponse> {
-  const correo = correoInterested(speakerData)
+  const correo = correoSpeaker(speakerData)
   const documentName = "presentacion" + speakerData.email.split('@')[0] + ".pdf"
   const req = createRequest(speakerData.title, correo, speakerData.encoded_file, documentName, env)
   try {

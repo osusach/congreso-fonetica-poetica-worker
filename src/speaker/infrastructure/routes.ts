@@ -1,12 +1,12 @@
 import { Hono } from "hono";
 import { authVerification } from "../../shared/authVerification";
 import { dbClient } from "../../shared/dbClient";
-import { getInterestedSpeakers } from "../application/getInterestedSpeakers";
-import { addInterestedSpeaker } from "../application/addInterestedSpeaker";
+import { getSpeakers } from "../application/getSpeakers";
+import { addSpeaker } from "../application/addSpeaker";
 
-const interested = new Hono<{ Bindings: Bindings }>();
+const speaker = new Hono<{ Bindings: Bindings }>();
 
-interested.get("/", async (c) => {
+speaker.get("/", async (c) => {
   const auth = c.req.header("Authorization");
   if (!auth) {
     return c.json(
@@ -19,21 +19,21 @@ interested.get("/", async (c) => {
     return c.json(verification, 401);
   }
   const db = dbClient(c.env);
-  const response = await getInterestedSpeakers(db);
+  const response = await getSpeakers(db);
   if (!response.success) {
     return c.json(response, 500);
   }
   return c.json(response, 200);
 });
 
-interested.post("/", async (c) => {
+speaker.post("/", async (c) => {
   const db = dbClient(c.env);
   const body = await c.req.parseBody();
-  const response = await addInterestedSpeaker(body, db, c.env);
+  const response = await addSpeaker(body, db, c.env);
   if (!response.success) {
     return c.json(response, 400);
   }
   return c.json(response, 200);
 });
 
-export default interested;
+export default speaker;

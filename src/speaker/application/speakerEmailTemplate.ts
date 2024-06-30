@@ -1,6 +1,6 @@
 import { speakerRequest } from "./schemas";
 
-export const correoInterested = (data: speakerRequest) => {
+export const correoSpeaker = (data: speakerRequest) => {
   const authors = data.authors.split(";").join("\n    - ")
   const hosts = data.hosts.split(";").join("\n    - ")
   const tags = data.keywords.split(";").join(", ")
