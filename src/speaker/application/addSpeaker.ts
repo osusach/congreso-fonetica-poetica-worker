@@ -1,18 +1,7 @@
 import { Client } from "@libsql/client";
-import { z } from "zod";
 import { savePDF } from "./savePdf";
 import { speakerRequestSchema } from "./schemas";
 import { sendSpeakerEmail } from "./sendInterestedSpeakerEmail";
-
-function base64Encode (buf: ArrayBuffer) {
-  let string = '';
-  (new Uint8Array(buf)).forEach(
-      (byte) => { string += String.fromCharCode(byte) }
-    )
-  return btoa(string)
-}
-
-
 
 export async function addSpeaker(
   body: any,
@@ -43,8 +32,6 @@ export async function addSpeaker(
     raw_file,
   } = bodyValidation.data;
 
-  
-
   const pdfId = await savePDF(raw_file, authors, env);
   if (!pdfId.success) {
     return {
@@ -60,8 +47,6 @@ export async function addSpeaker(
       error: sendEmail.error
     }
   }
-
-
 
   const query =
     "INSERT INTO speaker (email, name, institution, authors, country, hosts, title, lang, keywords, theme, abstract, bibliography, presentation_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
