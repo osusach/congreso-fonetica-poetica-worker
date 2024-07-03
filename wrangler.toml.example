@@ -7,6 +7,18 @@ TURSO_TOKEN = ""
 MAILERSEND_TOKEN = ""
 AUTH_TOKEN = ""
 
+[[vars.COMMITTEE]]
+email = ""
+name = ""
+
+[[vars.COMMITTEE]]
+email = ""
+name = ""
+
+[[vars.COMMITTEE]]
+email = ""
+name = ""
+
 [[r2_buckets]]
 binding = "PDF_BUCKET"
 bucket_name = ""

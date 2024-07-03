@@ -4,7 +4,8 @@ import { z } from "zod";
 
 const listenerSchema = z.object({
   id: z.number(),
-  email: z.string().email()
+  email: z.string().email(),
+  lang: z.number()
 })
 
 

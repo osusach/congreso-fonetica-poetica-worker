@@ -45,8 +45,8 @@ function createRequest(email: string, env: Bindings) {
     },
     body: JSON.stringify({
       from: {
-        email: "email@osusach.com",
-        name: "Ligmacio",
+        email: "fypcongreso@usach.cl",
+        name: "Congreso Fonética y Poética",
       },
       to: [
         {
@@ -54,7 +54,6 @@ function createRequest(email: string, env: Bindings) {
         },
       ],
       subject: "Congreso de Fonética y Poética",
-      text: "Registro de interés",
       html: correoListener,
     }),
   });

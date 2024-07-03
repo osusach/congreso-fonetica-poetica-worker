@@ -5,4 +5,10 @@ type Bindings = {
   MAILERSEND_TOKEN: string;
   AUTH_TOKEN: string
   PDF_BUCKET: R2Bucket;
+  COMMITTEE: commitee[]
 };
+
+type committee = {
+  email: string,
+  name: string
+}
