@@ -8,7 +8,6 @@ const speakerSchema = z.object({
   institution: z.string(),
   authors: z.string(),
   country: z.string(),
-  affiliation: z.string(),
   hosts: z.string(),
   title: z.string(),
   lang: z.number().min(1).max(3).int(),
